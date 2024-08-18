@@ -19,6 +19,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
 public class BatchConfig {
+	/**
     private final JobRepository jobRepository;
     private final PlatformTransactionManager transactionManager;
 
@@ -55,4 +56,5 @@ public class BatchConfig {
     ItemWriter<String> itemWriter() {
         return items -> items.forEach(System.out::println);
     }
+    */
 }
