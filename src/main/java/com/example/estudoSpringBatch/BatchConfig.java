@@ -1,10 +1,10 @@
 package com.example.estudoSpringBatch;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
+import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.core.repository.JobRepository;
@@ -12,6 +12,7 @@ import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.support.ListItemReader;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -44,9 +45,10 @@ public class BatchConfig {
     }
 
     @Bean
-    ItemReader<String> itemReader() {
-        List<String> data = Arrays.asList("Olá", "Mundo", "Spring Batch");
-        return new ListItemReader<>(data);
+    @StepScope
+    ItemReader<String> itemReader(@Value("#{jobParameters['nome']}") String nome) {
+        String data = String.format("Olá, %s!", nome);
+        return new ListItemReader<>(List.of(data));
     }
 
     @Bean
