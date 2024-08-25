@@ -1,12 +1,9 @@
-package com.example.estudoSpringBatch;
+package com.example.estudoSpringBatch.job;
 
 import java.util.List;
 
-import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.StepScope;
-import org.springframework.batch.core.job.builder.JobBuilder;
-import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.item.ItemReader;
@@ -19,21 +16,12 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
 public class BatchConfig {
-	/**
     private final JobRepository jobRepository;
     private final PlatformTransactionManager transactionManager;
 
     public BatchConfig(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
         this.jobRepository = jobRepository;
         this.transactionManager = transactionManager;
-    }
-
-    @Bean
-    Job imprimeOlaJob(Step imprimeOlaStep) {
-        return new JobBuilder("imprimeOlaJob", jobRepository)
-                .start(imprimeOlaStep)
-                .incrementer(new RunIdIncrementer())
-                .build();
     }
 
     @Bean
@@ -56,5 +44,4 @@ public class BatchConfig {
     ItemWriter<String> itemWriter() {
         return items -> items.forEach(System.out::println);
     }
-    */
 }

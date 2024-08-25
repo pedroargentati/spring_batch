@@ -18,7 +18,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
 public class ParImparBatchConfig {
-
+/*
     private final JobRepository jobRepository;
     private final PlatformTransactionManager transactionManager;
 
@@ -60,5 +60,5 @@ public class ParImparBatchConfig {
 	public ItemWriter<String> imprimeWriter() {
 		return itens -> itens.forEach(System.out::println);
 	}
-	
+	*/
 }
